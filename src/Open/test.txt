@@ -1,0 +1,6 @@
+Accessory ID	,Accessory Name	,Price	,Brand	,Recommendation	,Category	,Budget Level	,In stock
+1		/Canon 700D	/40000	/Canon	/10		/Camera		/High		/22
+2		/Canon Tripod	/2000	/Canon	/7		/Tripod		/High		/23
+3		/Canon 80mm	/10000	/Canon	/9		/Lens		/High		/123
+4		/Phot-R blower	/400	/Phot_r	/7		/Blower		/High		/4534
+5		/cello micro SD	/3000	/Cello	/9		/SD Card	/High		/321
