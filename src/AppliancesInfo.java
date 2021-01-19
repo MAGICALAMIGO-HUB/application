@@ -27,6 +27,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AppliancesInfo extends javax.swing.JFrame{
 
+    static int binarySearch(int[] priceArrayIn,int tofind){
+
+        int Arraycount=priceArrayIn.length;
+        int firstIndex=0;
+        int lastIndex=Arraycount-1;
+        int middleIndex=(firstIndex+lastIndex)/2;
+        while(firstIndex<=lastIndex){
+            if(priceArrayIn[middleIndex]<tofind){
+                firstIndex=middleIndex+1;
+            }else if(priceArrayIn[middleIndex]==tofind){
+                return middleIndex;
+                
+            }else{
+            lastIndex=middleIndex-1;
+            middleIndex=(firstIndex-lastIndex)/2;
+            }
+
+        }
+        return -1;
+    }
+
     public AppliancesInfo(){
         initComponents();
     }
@@ -67,9 +88,9 @@ public class AppliancesInfo extends javax.swing.JFrame{
         InStock = new javax.swing.JTextField();
         Heading_for_software_Name = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         search_display = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -354,16 +375,15 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
         jLabel14.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText("Search All :");
-
-        jTextField11.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
-        jTextField11.setBorder(null);
+        jLabel14.setText("Category Search :");
 
         jButton2.setText("Search");
         jButton2.setBorder(null);
 
         jLabel27.setFont(new java.awt.Font("Arial Black", 2, 48)); // NOI18N
         jLabel27.setText("Camera Accessories");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lens", "Camera", "Mic", "Tripod", "Blower", "SD Card" }));
 
         javax.swing.GroupLayout Heading_for_software_NameLayout = new javax.swing.GroupLayout(Heading_for_software_Name);
         Heading_for_software_Name.setLayout(Heading_for_software_NameLayout);
@@ -374,25 +394,22 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(118, 118, 118))
         );
         Heading_for_software_NameLayout.setVerticalGroup(
             Heading_for_software_NameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Heading_for_software_NameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(Heading_for_software_NameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(Heading_for_software_NameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14))
-                    .addGroup(Heading_for_software_NameLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
             .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Heading_for_software_NameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Heading_for_software_NameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         getContentPane().add(Heading_for_software_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1110, 80));
@@ -1019,8 +1036,9 @@ public class AppliancesInfo extends javax.swing.JFrame{
         }
         if("".equals(pricefield.getText())){
             JOptionPane.showMessageDialog(null,"Select a price value from the drop down list.");
-        }else if(a==false){JOptionPane.showMessageDialog(null,"First click on the drop down list button then  \nSelect a price value from the drop down list.");}
-        else{
+        }else if(a==false){
+            JOptionPane.showMessageDialog(null,"First click on the drop down list button then  \nSelect a price value from the drop down list.");
+        }else{
             Vector<String> dataa=new Vector<>();
             DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
             int allrowCount=model.getRowCount();
@@ -1135,7 +1153,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 }else if(dataArrayCategory[result]=="Blower"){
                     img1="blower1.png";
                 }
-                
+
                 ImageIcon iconn=new ImageIcon(img1);
                 JOptionPane.showMessageDialog(null,toshow,"haha",JOptionPane.INFORMATION_MESSAGE,iconn);
             }
@@ -1273,17 +1291,14 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        String filePath= "C:\\Users\\dell\\Desktop\\__my all of the study met__\\2nd year\\emerging\\Appliances_IS\\src\\Open\\test.txt";
-        File file = new File(filePath);
+
+        String filePath="C:\\Users\\dell\\Desktop\\__my all of the study met__\\2nd year\\emerging\\Appliances_IS\\src\\Open\\test.txt";
+        File file=new File(filePath);
         try{
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String firstLine = br.readLine().trim();
+            BufferedReader br=new BufferedReader(new FileReader(file));
+            String firstLine=br.readLine().trim();
             //String[] columnName = firstLine.split(",");
-            DefaultTableModel model= (DefaultTableModel)jTable2.getModel();
+            DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
             // making a privet object named model in class named DefaultTableModel
             int allrowCount=model.getRowCount();
             //creating a int type veriable which will store count of all the row in model table which is jTable2
@@ -1292,17 +1307,17 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 model.removeRow(i);
 
             }
-           // model.setColumnIdentifiers(columnName);
-            
-            Object[] tableLines= br.lines().toArray();
-            
+            // model.setColumnIdentifiers(columnName);
+
+            Object[] tableLines=br.lines().toArray();
+
             for(int i=0;i<tableLines.length;i++){
-                String line = tableLines[i].toString().trim();
-                String[] DataRow = line.split("/"); 
+                String line=tableLines[i].toString().trim();
+                String[] DataRow=line.split("/");
                 model.addRow(DataRow);
             }
         }catch(Exception e){
-            
+
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -1787,6 +1802,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3RemoveSelectedRow;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1831,7 +1847,6 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JPanel new_accessory_entry;
     private javax.swing.JTextField pricefield;
     private javax.swing.JPanel search_display;
