@@ -38,10 +38,10 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 firstIndex=middleIndex+1;
             }else if(priceArrayIn[middleIndex]==tofind){
                 return middleIndex;
-                
+
             }else{
-            lastIndex=middleIndex-1;
-            middleIndex=(firstIndex-lastIndex)/2;
+                lastIndex=middleIndex-1;
+                middleIndex=(firstIndex-lastIndex)/2;
             }
 
         }
@@ -1128,10 +1128,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
             }
 
-            System.out.println("////////////////////////////");
-            for(int i=0;i<dataa.toArray().length;i++){
-                System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
-            }
+            
             //binary search the shorted data
 
             int result=Arrays.binarySearch(dataArray,Integer.valueOf(pricefield.getText()));
