@@ -1,0 +1,9 @@
+Accessory ID,Accessory Name,Price,Brand,Recommendation,Category,Budget Level,In stock
+1/Canon 700D/40000/canon/10/Camera/High/128
+2/Canon 30D/31230/canon/9/Camera/High/342
+3/Canon 70D/22460/canon/8/Camera/High/556
+4/Canon  Tripod/13690/canon/7/Tripod/High/770
+5/Canon 180mm/597/canon/6/Lens/High/984
+6/Canon 360mm/497/canon/5/Lens/High/1198
+7/Canon mirrorless/397/canon/4/Camera/High/1412
+8/Canon mic/297/canon/3/Mic/High/1626

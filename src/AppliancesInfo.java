@@ -1,18 +1,16 @@
 
 import java.awt.Desktop;
-import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,6 +48,8 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     public AppliancesInfo(){
         initComponents();
+        ImageIcon img=new ImageIcon("");
+
     }
 
     /**
@@ -88,9 +88,9 @@ public class AppliancesInfo extends javax.swing.JFrame{
         InStock = new javax.swing.JTextField();
         Heading_for_software_Name = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        SearchCategory = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CategoryCountComboBox = new javax.swing.JComboBox<>();
         search_display = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -135,6 +135,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
         jButton3RemoveSelectedRow = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -154,6 +155,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Camera Accessories");
         setBackground(new java.awt.Color(214, 34, 70));
         setFocusable(false);
         setMinimumSize(new java.awt.Dimension(1345, 770));
@@ -375,15 +377,20 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
         jLabel14.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText("Category Search :");
+        jLabel14.setText("Category Count:");
 
-        jButton2.setText("Search");
-        jButton2.setBorder(null);
+        SearchCategory.setText("Search");
+        SearchCategory.setBorder(null);
+        SearchCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchCategoryActionPerformed(evt);
+            }
+        });
 
         jLabel27.setFont(new java.awt.Font("Arial Black", 2, 48)); // NOI18N
         jLabel27.setText("Camera Accessories");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lens", "Camera", "Mic", "Tripod", "Blower", "SD Card" }));
+        CategoryCountComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lens", "Camera", "Mic", "Tripod", "Blower", "SD Card" }));
 
         javax.swing.GroupLayout Heading_for_software_NameLayout = new javax.swing.GroupLayout(Heading_for_software_Name);
         Heading_for_software_Name.setLayout(Heading_for_software_NameLayout);
@@ -395,9 +402,9 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CategoryCountComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118))
         );
         Heading_for_software_NameLayout.setVerticalGroup(
@@ -407,8 +414,8 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(Heading_for_software_NameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CategoryCountComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -827,8 +834,17 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
         jMenu1.setText("File");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setText("open");
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setText("Open");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setText("Open Test");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -1128,31 +1144,29 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
             }
 
-            
             //binary search the shorted data
-
             int result=Arrays.binarySearch(dataArray,Integer.valueOf(pricefield.getText()));
             if(result<0){
                 JOptionPane.showMessageDialog(null,"element not found");
             }else{
                 String toshow=(" ID:-"+dataArrayID[result]+"\n Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result]+"\n brand:-"+dataArrayBrand[result]+"\n Recommendation:-"+dataArrayRecommendation[result]+"\n Category:-"+dataArrayCategory[result]);
                 String img1="";
-                if(dataArrayCategory[result]=="Camera"){
+                if("Camera".equals(dataArrayCategory[result])){
                     img1="cameragif.gif";
-                }else if(dataArrayCategory[result]=="Lens"){
+                }else if("Lens".equals(dataArrayCategory[result])){
                     img1="lensgiphy.gif";
-                }else if(dataArrayCategory[result]=="Tripod"){
+                }else if("Tripod".equals(dataArrayCategory[result])){
                     img1="tripod2.png";
-                }else if(dataArrayCategory[result]=="Mic"){
+                }else if("Mic".equals(dataArrayCategory[result])){
                     img1="micgif.gif";
-                }else if(dataArrayCategory[result]=="SD Card"){
+                }else if("SD Card".equals(dataArrayCategory[result])){
                     img1="sdgif.gif";
-                }else if(dataArrayCategory[result]=="Blower"){
+                }else if("Blower".equals(dataArrayCategory[result])){
                     img1="blower1.png";
                 }
-
+                String theName = "Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result];
                 ImageIcon iconn=new ImageIcon(img1);
-                JOptionPane.showMessageDialog(null,toshow,"haha",JOptionPane.INFORMATION_MESSAGE,iconn);
+                JOptionPane.showMessageDialog(null,toshow,theName,JOptionPane.INFORMATION_MESSAGE,iconn);
             }
         }
         //show message dialog box contaning searched data
@@ -1289,7 +1303,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
 
-        String filePath="C:\\Users\\dell\\Desktop\\__my all of the study met__\\2nd year\\emerging\\Appliances_IS\\src\\Open\\test.txt";
+        String filePath="C:\\Users\\dell\\Desktop\\__my all of the study met__\\2nd year\\emerging\\Appliances_IS\\src\\Open\\Open.txt";
         File file=new File(filePath);
         try{
             BufferedReader br=new BufferedReader(new FileReader(file));
@@ -1741,6 +1755,62 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     }//GEN-LAST:event_searchpricecomboActionPerformed
 
+    private void SearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCategoryActionPerformed
+        // TODO add your handling code here:
+        String selecteditem = CategoryCountComboBox.getSelectedItem().toString();
+        DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
+            int allrowCount=model.getRowCount();
+            int countthing = 0;
+            //creating a int type veriable which will store count of all the row in model table which is jTable2
+            for(int i=allrowCount-1;i>=0;i--){
+                String tableprice=model.getValueAt(jTable2.convertRowIndexToModel(i),5).toString();
+                if(selecteditem==tableprice){
+                 countthing ++;
+                }
+            }
+            String toSay="The total count of "+selecteditem+" is "+ countthing;
+            JOptionPane.showMessageDialog(this,toSay);
+    }//GEN-LAST:event_SearchCategoryActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        //using file chooser window to search selective file to open  
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String Filename = f.getAbsolutePath();
+        JOptionPane.showMessageDialog(null,Filename);
+        // now using the file path selected and stoder in Filename 
+                String filePath=Filename;
+        File file=new File(filePath);
+        try{
+            BufferedReader br=new BufferedReader(new FileReader(file));
+            String firstLine=br.readLine().trim();
+            //String[] columnName = firstLine.split(",");
+            DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
+            // making a privet object named model in class named DefaultTableModel
+            int allrowCount=model.getRowCount();
+            //creating a int type veriable which will store count of all the row in model table which is jTable2
+            for(int i=allrowCount-1;i>=0;i--){
+                //this is a for loop which will loop for count of allrowCount and model.removeRow(i)will remove row one by one
+                model.removeRow(i);
+
+            }
+            // model.setColumnIdentifiers(columnName);
+
+            Object[] tableLines=br.lines().toArray();
+
+            for(int i=0;i<tableLines.length;i++){
+                String line=tableLines[i].toString().trim();
+                String[] DataRow=line.split("/");
+                model.addRow(DataRow);
+            }
+        }catch(Exception e){
+
+        }
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1772,6 +1842,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Add_button;
+    private javax.swing.JComboBox<String> CategoryCountComboBox;
     private javax.swing.JToggleButton Delete_all_button;
     private javax.swing.JPanel Heading_for_software_Name;
     private javax.swing.JTextField InBrand;
@@ -1781,6 +1852,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JTextField InPrice;
     private javax.swing.JSlider InRecommendation;
     private javax.swing.JTextField InStock;
+    private javax.swing.JButton SearchCategory;
     private javax.swing.JTextField Update1;
     private javax.swing.JRadioButton Update11;
     private javax.swing.JRadioButton Update12;
@@ -1796,10 +1868,8 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JPanel data_table;
     private javax.swing.JLabel image11;
     private javax.swing.JLabel image2;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3RemoveSelectedRow;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1835,6 +1905,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
@@ -1850,5 +1921,9 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JButton searchprice;
     private javax.swing.JComboBox<String> searchpricecombo;
     // End of variables declaration//GEN-END:variables
+
+    private void initComponent(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
