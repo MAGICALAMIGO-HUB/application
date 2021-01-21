@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AppliancesInfo extends javax.swing.JFrame{
 // this is a method for binary Search where it take two intake 
+
     static int binarySearch(int[] priceArrayIn,int tofind){
 
         int Arraycount=priceArrayIn.length;
@@ -1050,135 +1051,140 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     private void searchpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchpriceActionPerformed
         // TODO add your handling code here:
-        boolean a=true;
-        System.out.println("fghjkjhgfdfghj:-"+(pricefield.getText()));
-        try{
-            Integer.valueOf(pricefield.getText());
-            a=true;
-        }catch(Exception e){
-            a=false;
-        }
-        if("".equals(pricefield.getText())){
-            JOptionPane.showMessageDialog(null,"Select a price value from the drop down list.");
-        }else if(a==false){
-            JOptionPane.showMessageDialog(null,"First click on the drop down list button then  \nSelect a price value from the drop down list.");
-        }else{
-            Vector<String> dataa=new Vector<>();
-            DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
-            int allrowCount=model.getRowCount();
-
-            int dataArrayID[]=new int[allrowCount];
-            String dataArrayName[]=new String[allrowCount];
-            String dataArrayBrand[]=new String[allrowCount];
-            int dataArrayRecommendation[]=new int[allrowCount];
-            String dataArrayCategory[]=new String[allrowCount];
-            //creating a int type veriable which will store count of all the row in model table which is jTable2
-            for(int i=0;i<allrowCount;i++){
-                String tableprice=model.getValueAt(jTable2.convertRowIndexToModel(i),2).toString();
-                dataa.add(tableprice);
-
-                String tableID=model.getValueAt(jTable2.convertRowIndexToModel(i),0).toString();
-                String tableName=model.getValueAt(jTable2.convertRowIndexToModel(i),1).toString();
-                String tableBrand=model.getValueAt(jTable2.convertRowIndexToModel(i),3).toString();
-                String tableRecommendation=model.getValueAt(jTable2.convertRowIndexToModel(i),4).toString();
-                String tableCategory=model.getValueAt(jTable2.convertRowIndexToModel(i),5).toString();
-
-                dataArrayID[i]=Integer.valueOf(tableID);
-                dataArrayName[i]=tableName;
-                dataArrayBrand[i]=tableBrand;
-                dataArrayRecommendation[i]=Integer.valueOf(tableRecommendation);
-                dataArrayCategory[i]=tableCategory;
-                /*System.out.println(dataArrayID[i]);
-            System.out.println("ID:-"+dataArrayID[i]+"|| Name:-"+dataArrayName[i]+"|| Price:-"+dataa.get(i)+"|| brand:-"+dataArrayBrand[i]+"|| Recommendation:-"+dataArrayRecommendation[i]+"|| Category:-"+dataArrayCategory[i]);
-                 */
+        DefaultTableModel models=(DefaultTableModel)jTable2.getModel();
+                int allrowCounts=models.getRowCount();
+      if(allrowCounts==0){
+            JOptionPane.showMessageDialog(null,"the table is empty");
+        }else{          
+            boolean a=true;
+            System.out.println("fghjkjhgfdfghj:-"+(pricefield.getText()));
+            try{
+                Integer.valueOf(pricefield.getText());
+                a=true;
+            }catch(Exception e){
+                a=false;
             }
+            
+            if("".equals(pricefield.getText())){
+                JOptionPane.showMessageDialog(null,"Select a price value from the drop down list.");
+            }else if(a==false){
+                JOptionPane.showMessageDialog(null,"First click on the drop down list button then  \nSelect a price value from the drop down list.");
+            }else{
+                Vector<String> dataa=new Vector<>();
+                DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
+                int allrowCount=model.getRowCount();
 
-            //first make array of Vector
-            int dataArray[]=new int[dataa.toArray().length];//making a array named dataArray which will store data of vector named dataa and the number of the ittration of dataArray list is determined by ''int[dataa.toArray().length]'' statement
-            for(int i=0;i<dataa.toArray().length;i++){
-                dataArray[i]=Integer.valueOf(dataa.get(i));
-                //System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
-            }
+                int dataArrayID[]=new int[allrowCount];
+                String dataArrayName[]=new String[allrowCount];
+                String dataArrayBrand[]=new String[allrowCount];
+                int dataArrayRecommendation[]=new int[allrowCount];
+                String dataArrayCategory[]=new String[allrowCount];
+                //creating a int type veriable which will store count of all the row in model table which is jTable2
+                for(int i=0;i<allrowCount;i++){
+                    String tableprice=model.getValueAt(jTable2.convertRowIndexToModel(i),2).toString();
+                    dataa.add(tableprice);
 
-            //selection short of data
-            int nn=dataArray.length;
-            for(int f=0;f<nn;f++){
-                for(int i=0;i<nn;i++){
-                    int smallNumberIndex=i;
-                    //JOptionPane.showMessageDialog(null,i);
-                    for(int j=i;j<nn;j++){
-                        if(dataArray[smallNumberIndex]>dataArray[j]){
-                            smallNumberIndex=j;
+                    String tableID=model.getValueAt(jTable2.convertRowIndexToModel(i),0).toString();
+                    String tableName=model.getValueAt(jTable2.convertRowIndexToModel(i),1).toString();
+                    String tableBrand=model.getValueAt(jTable2.convertRowIndexToModel(i),3).toString();
+                    String tableRecommendation=model.getValueAt(jTable2.convertRowIndexToModel(i),4).toString();
+                    String tableCategory=model.getValueAt(jTable2.convertRowIndexToModel(i),5).toString();
 
-                            // Swap the found minimum element with the first 
-                            // element 
-                            int temp=dataArray[smallNumberIndex];
-                            dataArray[smallNumberIndex]=dataArray[i];
-                            dataArray[i]=temp;
+                    dataArrayID[i]=Integer.valueOf(tableID);
+                    dataArrayName[i]=tableName;
+                    dataArrayBrand[i]=tableBrand;
+                    dataArrayRecommendation[i]=Integer.valueOf(tableRecommendation);
+                    dataArrayCategory[i]=tableCategory;
+                    /*System.out.println(dataArrayID[i]);
+                    System.out.println("ID:-"+dataArrayID[i]+"|| Name:-"+dataArrayName[i]+"|| Price:-"+dataa.get(i)+"|| brand:-"+dataArrayBrand[i]+"|| Recommendation:-"+dataArrayRecommendation[i]+"|| Category:-"+dataArrayCategory[i]);
+                    */
+                }
 
-                            ///////////////////////////////////////////////
-                            //trying to swap all the other colums
-                            int temp1=dataArrayID[smallNumberIndex];
-                            dataArrayID[smallNumberIndex]=dataArrayID[i];
-                            dataArrayID[i]=temp1;
-                            ///////////////////////////////////////////////
-                            String temp2=dataArrayName[smallNumberIndex];
-                            dataArrayName[smallNumberIndex]=dataArrayName[i];
-                            dataArrayName[i]=temp2;
-                            ///////////////////////////////////////////////
-                            String temp3=dataArrayBrand[smallNumberIndex];
-                            dataArrayBrand[smallNumberIndex]=dataArrayBrand[i];
-                            dataArrayBrand[i]=temp3;
-                            ///////////////////////////////////////////////
-                            int temp4=dataArrayRecommendation[smallNumberIndex];
-                            dataArrayRecommendation[smallNumberIndex]=dataArrayRecommendation[i];
-                            dataArrayRecommendation[i]=temp4;
-                            ///////////////////////////////////////////////
-                            String temp5=dataArrayCategory[smallNumberIndex];
-                            dataArrayCategory[smallNumberIndex]=dataArrayCategory[i];
-                            dataArrayCategory[i]=temp5;
-                            ///////////////////////////////////////////////
+                //first make array of Vector
+                int dataArray[]=new int[dataa.toArray().length];//making a array named dataArray which will store data of vector named dataa and the number of the ittration of dataArray list is determined by ''int[dataa.toArray().length]'' statement
+                for(int i=0;i<dataa.toArray().length;i++){
+                    dataArray[i]=Integer.valueOf(dataa.get(i));
+                    //System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
+                }
+
+                //selection sort of data
+                int nn=dataArray.length;
+                for(int f=0;f<nn;f++){
+                    for(int i=0;i<nn;i++){
+                        int smallNumberIndex=i;
+                        //JOptionPane.showMessageDialog(null,i);
+                        for(int j=i;j<nn;j++){
+                            if(dataArray[smallNumberIndex]>dataArray[j]){
+                                smallNumberIndex=j;
+                                
+                                // Swap the found minimum element with the first
+                                // element 
+                                int temp=dataArray[smallNumberIndex];
+                                dataArray[smallNumberIndex]=dataArray[i];
+                                dataArray[i]=temp;
+                                ///////////////////////////////////////////////
+                                //trying to swap all the other colums
+                                int temp1=dataArrayID[smallNumberIndex];
+                                dataArrayID[smallNumberIndex]=dataArrayID[i];
+                                dataArrayID[i]=temp1;
+                                ///////////////////////////////////////////////
+                                String temp2=dataArrayName[smallNumberIndex];
+                                dataArrayName[smallNumberIndex]=dataArrayName[i];
+                                dataArrayName[i]=temp2;
+                                ///////////////////////////////////////////////
+                                String temp3=dataArrayBrand[smallNumberIndex];
+                                dataArrayBrand[smallNumberIndex]=dataArrayBrand[i];
+                                dataArrayBrand[i]=temp3;
+                                ///////////////////////////////////////////////
+                                int temp4=dataArrayRecommendation[smallNumberIndex];
+                                dataArrayRecommendation[smallNumberIndex]=dataArrayRecommendation[i];
+                                dataArrayRecommendation[i]=temp4;
+                                ///////////////////////////////////////////////
+                                String temp5=dataArrayCategory[smallNumberIndex];
+                                dataArrayCategory[smallNumberIndex]=dataArrayCategory[i];
+                                dataArrayCategory[i]=temp5;
+                                ///////////////////////////////////////////////
+                            }
                         }
                     }
                 }
-            }
 
-            System.out.println("////////////////////////////");
-            for(int i=0;i<dataa.toArray().length;i++){
-                System.out.println("ID:-"+dataArrayID[i]+"|| Name:-"+dataArrayName[i]+"|| Price:-"+dataArray[i]+"|| brand:-"+dataArrayBrand[i]+"|| Recommendation:-"+dataArrayRecommendation[i]+"|| Category:-"+dataArrayCategory[i]);
-            }
-            System.out.println("////////////////////////////");
-            for(int i=0;i<dataa.toArray().length;i++){
-                System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
-            }
-
-            //binary search the shorted data
-            int result=AppliancesInfo.binarySearch(dataArray,Integer.valueOf(pricefield.getText()));
-            if(result<0){
-                JOptionPane.showMessageDialog(null,"element not found");
-            }else{
-                String toshow=(" ID:-"+dataArrayID[result]+"\n Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result]+"\n brand:-"+dataArrayBrand[result]+"\n Recommendation:-"+dataArrayRecommendation[result]+"\n Category:-"+dataArrayCategory[result]);
-                String img1="";
-                if("Camera".equals(dataArrayCategory[result])){
-                    img1="cameragif.gif";
-                }else if("Lens".equals(dataArrayCategory[result])){
-                    img1="lensgiphy.gif";
-                }else if("Tripod".equals(dataArrayCategory[result])){
-                    img1="tripod2.png";
-                }else if("Mic".equals(dataArrayCategory[result])){
-                    img1="micgif.gif";
-                }else if("SD Card".equals(dataArrayCategory[result])){
-                    img1="sdgif.gif";
-                }else if("Blower".equals(dataArrayCategory[result])){
-                    img1="blower1.png";
+                System.out.println("////////////////////////////");
+                for(int i=0;i<dataa.toArray().length;i++){
+                    System.out.println("ID:-"+dataArrayID[i]+"|| Name:-"+dataArrayName[i]+"|| Price:-"+dataArray[i]+"|| brand:-"+dataArrayBrand[i]+"|| Recommendation:-"+dataArrayRecommendation[i]+"|| Category:-"+dataArrayCategory[i]);
                 }
-                String theName="Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result];
-                ImageIcon iconn=new ImageIcon(img1);
-                JOptionPane.showMessageDialog(null,toshow,theName,JOptionPane.INFORMATION_MESSAGE,iconn);
+                System.out.println("////////////////////////////");
+                for(int i=0;i<dataa.toArray().length;i++){
+                    System.out.println("ID:-"+(i+1)+"Array:-"+dataArray[i]+" dataa:-"+dataa.get(i));
+                }
+
+                //binary search the shorted data
+                int result=AppliancesInfo.binarySearch(dataArray,Integer.valueOf(pricefield.getText()));
+                if(result<0){
+                    JOptionPane.showMessageDialog(null,"element not found");
+                }else{
+                    String toshow=(" ID:-"+dataArrayID[result]+"\n Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result]+"\n brand:-"+dataArrayBrand[result]+"\n Recommendation:-"+dataArrayRecommendation[result]+"\n Category:-"+dataArrayCategory[result]);
+                    String img1="";
+                    if("Camera".equals(dataArrayCategory[result])){
+                        img1="cameragif.gif";
+                    }else if("Lens".equals(dataArrayCategory[result])){
+                        img1="lensgiphy.gif";
+                    }else if("Tripod".equals(dataArrayCategory[result])){
+                        img1="tripod2.png";
+                    }else if("Mic".equals(dataArrayCategory[result])){
+                        img1="micgif.gif";
+                    }else if("SD Card".equals(dataArrayCategory[result])){
+                        img1="sdgif.gif";
+                    }else if("Blower".equals(dataArrayCategory[result])){
+                        img1="blower1.png";
+                    }
+                    String theName="Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result];
+                    ImageIcon iconn=new ImageIcon(img1);
+                    JOptionPane.showMessageDialog(null,toshow,theName,JOptionPane.INFORMATION_MESSAGE,iconn);
+                }
             }
         }
-        //show message dialog box contaning searched data
-        //jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(dataa));
+
 
     }//GEN-LAST:event_searchpriceActionPerformed
 
@@ -1759,7 +1765,11 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     private void searchpricecomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchpricecomboActionPerformed
         // TODO add your handling code here:
-        pricefield.setText(searchpricecombo.getSelectedItem().toString());
+        if("".equals(searchpricecombo.getSelectedItem().toString())){
+            JOptionPane.showMessageDialog(null,"the table is empty");
+        }else{
+            pricefield.setText(searchpricecombo.getSelectedItem().toString());
+        }
 
     }//GEN-LAST:event_searchpricecomboActionPerformed
 
@@ -1770,24 +1780,21 @@ public class AppliancesInfo extends javax.swing.JFrame{
         DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
         int allrowCount=model.getRowCount();
 
-
-        
         int countthing=0;
         //creating a int type veriable which will store count of all the row in model table which is jTable2
         for(int i=allrowCount-1;i>=0;i--){
-            
- 
+
             String tableCategory=model.getValueAt(jTable2.convertRowIndexToModel(i),5).toString();
-            
+
             //JOptionPane.showMessageDialog(this,selecteditem+tableprice);
             if(selecteditem==null?tableCategory==null:selecteditem.equals(tableCategory)){
                 countthing++;
-             
+
             }
         }
         String toSay="The total count of "+selecteditem+" is "+countthing;
         JOptionPane.showMessageDialog(this,toSay);
-        
+
     }//GEN-LAST:event_SearchCategoryActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
