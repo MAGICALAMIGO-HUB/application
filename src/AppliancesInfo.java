@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author dell
  */
 public class AppliancesInfo extends javax.swing.JFrame{
-
+// this is a method for binary Search where it take two intake 
     static int binarySearch(int[] priceArrayIn,int tofind){
 
         int Arraycount=priceArrayIn.length;
@@ -32,18 +32,17 @@ public class AppliancesInfo extends javax.swing.JFrame{
         int lastIndex=Arraycount-1;
         int middleIndex=(firstIndex+lastIndex)/2;
         while(firstIndex<=lastIndex){
-            if(priceArrayIn[middleIndex]<tofind){
-                firstIndex=middleIndex+1;
-            }else if(priceArrayIn[middleIndex]==tofind){
-                return middleIndex;
-
+            int mid=(firstIndex+lastIndex)/2;
+            if(priceArrayIn[mid]==tofind){
+                return mid;
+            }else if(priceArrayIn[mid]<tofind){
+                firstIndex=mid+1;
             }else{
-                lastIndex=middleIndex-1;
-                middleIndex=(firstIndex-lastIndex)/2;
+                lastIndex=mid-1;
             }
-
         }
         return -1;
+
     }
 
     public AppliancesInfo(){
@@ -140,6 +139,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jPanel2.setBackground(new java.awt.Color(229, 128, 57));
 
@@ -874,6 +874,14 @@ public class AppliancesInfo extends javax.swing.JFrame{
         });
         jMenu2.add(jMenuItem3);
 
+        jMenuItem5.setText("About us");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -1145,7 +1153,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
             }
 
             //binary search the shorted data
-            int result=Arrays.binarySearch(dataArray,Integer.valueOf(pricefield.getText()));
+            int result=AppliancesInfo.binarySearch(dataArray,Integer.valueOf(pricefield.getText()));
             if(result<0){
                 JOptionPane.showMessageDialog(null,"element not found");
             }else{
@@ -1164,7 +1172,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
                 }else if("Blower".equals(dataArrayCategory[result])){
                     img1="blower1.png";
                 }
-                String theName = "Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result];
+                String theName="Name:-"+dataArrayName[result]+"\n Price:-"+dataArray[result];
                 ImageIcon iconn=new ImageIcon(img1);
                 JOptionPane.showMessageDialog(null,toshow,theName,JOptionPane.INFORMATION_MESSAGE,iconn);
             }
@@ -1340,7 +1348,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
 
-        File helpFile=new File("C:\\Users\\dell\\Desktop\\__my all of the study met__\\2nd year\\emerging\\Appliances_IS\\src\\Help\\help.pdf");
+        File helpFile=new File("C:\\Users\\dell\\Desktop\\__my all of the study met__\\2nd year\\emerging\\Appliances_IS\\src\\Help\\HELP!!!.pdf");
         try{
             Desktop.getDesktop().open(helpFile);
         }catch(IOException ex){
@@ -1757,31 +1765,41 @@ public class AppliancesInfo extends javax.swing.JFrame{
 
     private void SearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCategoryActionPerformed
         // TODO add your handling code here:
-        String selecteditem = CategoryCountComboBox.getSelectedItem().toString();
+
+        String selecteditem=CategoryCountComboBox.getSelectedItem().toString();
         DefaultTableModel model=(DefaultTableModel)jTable2.getModel();
-            int allrowCount=model.getRowCount();
-            int countthing = 0;
-            //creating a int type veriable which will store count of all the row in model table which is jTable2
-            for(int i=allrowCount-1;i>=0;i--){
-                String tableprice=model.getValueAt(jTable2.convertRowIndexToModel(i),5).toString();
-                if(selecteditem==tableprice){
-                 countthing ++;
-                }
+        int allrowCount=model.getRowCount();
+
+
+        
+        int countthing=0;
+        //creating a int type veriable which will store count of all the row in model table which is jTable2
+        for(int i=allrowCount-1;i>=0;i--){
+            
+ 
+            String tableCategory=model.getValueAt(jTable2.convertRowIndexToModel(i),5).toString();
+            
+            //JOptionPane.showMessageDialog(this,selecteditem+tableprice);
+            if(selecteditem==null?tableCategory==null:selecteditem.equals(tableCategory)){
+                countthing++;
+             
             }
-            String toSay="The total count of "+selecteditem+" is "+ countthing;
-            JOptionPane.showMessageDialog(this,toSay);
+        }
+        String toSay="The total count of "+selecteditem+" is "+countthing;
+        JOptionPane.showMessageDialog(this,toSay);
+        
     }//GEN-LAST:event_SearchCategoryActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         //using file chooser window to search selective file to open  
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser=new JFileChooser();
         chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        String Filename = f.getAbsolutePath();
+        File f=chooser.getSelectedFile();
+        String Filename=f.getAbsolutePath();
         JOptionPane.showMessageDialog(null,Filename);
         // now using the file path selected and stoder in Filename 
-                String filePath=Filename;
+        String filePath=Filename;
         File file=new File(filePath);
         try{
             BufferedReader br=new BufferedReader(new FileReader(file));
@@ -1808,8 +1826,20 @@ public class AppliancesInfo extends javax.swing.JFrame{
         }catch(Exception e){
 
         }
-        
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        String messagetoshow="About us \n"
+                +"\n"
+                +"\n"
+                +"\t    This is the demo IS that has been formed using NETBEANS IDE, as required for the coursework of module \"EMERGING PROGRAMMING PLATFORMS AND TECHNOLOGIES\".\n"
+                +"We are four 2nd year computing students Pursuing BIT in Islington college. This Project contains required component to maintain information system.\n"
+                +"\n"
+                +"have a good day!!";
+        JOptionPane.showMessageDialog(null,messagetoshow);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1906,6 +1936,7 @@ public class AppliancesInfo extends javax.swing.JFrame{
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
